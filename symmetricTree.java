@@ -1,0 +1,53 @@
+package Day_5;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int val) {
+        this.val = val;
+    }
+}
+
+public class symmetricTree {
+
+    public static boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return isMirror(root.left, root.right);
+    }
+    public static boolean isMirror(TreeNode left, TreeNode right) {
+
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        if (left.val != right.val) {
+            return false;
+        }
+        return isMirror(left.left, right.right) &&
+               isMirror(left.right, right.left);
+    }
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(2);
+        root.left.left = new TreeNode(3);
+        root.left.right = new TreeNode(4);
+        root.right.left = new TreeNode(4);
+        root.right.right = new TreeNode(3);
+
+        System.out.println(isSymmetric(root)); // true
+        TreeNode root2 = new TreeNode(1);
+        root2.left = new TreeNode(2);
+        root2.right = new TreeNode(2);
+        root2.left.right = new TreeNode(3);
+        root2.right.right = new TreeNode(3);
+
+        System.out.println(isSymmetric(root2)); // false
+    }
+}
